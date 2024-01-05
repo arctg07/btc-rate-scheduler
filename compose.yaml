@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  scheduler:
+    image: scheduler:latest
+    ports:
+      - 8080:8080
+    networks:
+      - custom_network
+
+  redis:
+    image: 'redis/redis-stack:latest'
+    ports:
+      - 6379:6379
+      - 8001:8001
+    networks:
+      - custom_network
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - custom_network
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - custom_network
+
+networks:
+  custom_network:
+    driver: bridge
