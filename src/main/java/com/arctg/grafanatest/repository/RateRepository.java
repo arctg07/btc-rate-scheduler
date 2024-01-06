@@ -23,8 +23,7 @@ import static java.util.Collections.emptyList;
 public class RateRepository {
 
     private static final String RATE_PREFIX = "rate:v1:";
-    private static final TypeReference<Map<String, Object>> COIN_RATE_TYPE_REF = new TypeReference<>() {
-    };
+    private static final TypeReference<Map<String, Object>> COIN_RATE_TYPE_REF = new TypeReference<>() { };
     private static final Duration EXPIRE_TIME = Duration.ofDays(30);
     private final RedisTemplate<String, Object> redisTemplate;
     private final ObjectMapper objectMapper;
